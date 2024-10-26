@@ -5,7 +5,7 @@
  *	 Author: Pirata Nervo
  *   Copyright: © 2014 Pirata Nervo
  *   
- *   Website: http://www.mybb-plugins.com
+ *   Website: https://github.com/DiogoParrinha
  *
  *   Upgrade file to upgrade NewPoints 1.0 to NewPoints 1.1
  *

@@ -5,7 +5,7 @@
  *	 Author: Pirata Nervo
  *   Copyright: © 2014 Pirata Nervo
  *   
- *   Website: http://www.mybb-plugins.com
+ *   Website: https://github.com/DiogoParrinha
  *
  *   NewPoints plugin for MyBB - A complex but efficient points system for MyBB.
  *
