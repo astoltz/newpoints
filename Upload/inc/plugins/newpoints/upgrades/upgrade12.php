@@ -60,7 +60,7 @@ function upgrade12_run()
 	  `pointsview` DECIMAL(16,2) UNSIGNED NOT NULL default '0',
 	  `pointspost` DECIMAL(16,2) UNSIGNED NOT NULL default '0',
 	  PRIMARY KEY  (`rid`)
-		) ENGINE=MyISAM");
+		) ENGINE=InnoDB");
 	
 	$db->write_query("CREATE TABLE `".TABLE_PREFIX."newpoints_grouprules` (
 	  `rid` bigint(30) UNSIGNED NOT NULL auto_increment,
@@ -72,7 +72,7 @@ function upgrade12_run()
 	  `period` bigint(30) UNSIGNED NOT NULL default '0',
 	  `lastpay` bigint(30) UNSIGNED NOT NULL default '0',
 	  PRIMARY KEY  (`rid`)
-		) ENGINE=MyISAM");
+		) ENGINE=InnoDB");
 }
 
 ?>
