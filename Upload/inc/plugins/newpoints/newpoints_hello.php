@@ -5,7 +5,7 @@
  *	 Author: Pirata Nervo
  *   Copyright: © 2014 Pirata Nervo
  *   
- *   Website: http://www.mybb-plugins.com
+ *   Website: https://github.com/DiogoParrinha
  *
  *   A hello world plugin for NewPoints.
  *
@@ -52,7 +52,7 @@ function newpoints_hello_info()
 		"description"	=> "A sample plugin that prints hello world depending on the settings.",
 		"website"		=> "http://www.consoleworld.net",
 		"author"		=> "Pirata Nervo",
-		"authorsite"	=> "http://www.mybb-plugins.com",
+		"authorsite"	=> "https://github.com/DiogoParrinha",
 		"version"		=> "1.0",
 		"guid" 			=> "",
 		"compatibility" => "*"

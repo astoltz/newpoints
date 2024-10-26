@@ -5,7 +5,7 @@
  *	 Author: Pirata Nervo
  *   Copyright: © 2014 Pirata Nervo
  *
- *   Website: http://www.mybb-plugins.com
+ *   Website: https://github.com/DiogoParrinha
  *
  *   NewPoints plugin for MyBB - A complex but efficient points system for MyBB.
  *
@@ -36,7 +36,7 @@ function newpoints_plugin_info()
 		"description"	=> "NewPoints is a complex but efficient points system for MyBB.",
 		"website"		=> "http://www.consoleaddicted.com",
 		"author"		=> "Diogo Parrinha",
-		"authorsite"	=> "http://www.mybb-plugins.com",
+		"authorsite"	=> "https://github.com/DiogoParrinha",
 		"version"		=> "2.1.2",
 		"guid" 			=> "152e7f9f32fadb777d58fda000eb7a9e",
 		"compatibility" => "18*"
