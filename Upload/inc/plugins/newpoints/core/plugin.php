@@ -62,7 +62,7 @@ function newpoints_plugin_install()
 		  `value` text NOT NULL,
 		  `disporder` smallint(5) UNSIGNED NOT NULL default '0',
 		  PRIMARY KEY  (`sid`)
-			) ENGINE=MyISAM{$collation}");
+			) ENGINE=InnoDB{$collation}");
 	}
 
 	if(!$db->table_exists("newpoints_log"))
@@ -75,7 +75,7 @@ function newpoints_plugin_install()
 		  `uid` bigint(30) UNSIGNED NOT NULL default '0',
 		  `username` varchar(100) NOT NULL default '',
 		  PRIMARY KEY  (`lid`)
-			) ENGINE=MyISAM{$collation}");
+			) ENGINE=InnoDB{$collation}");
 	}
 
 	if(!$db->table_exists("newpoints_forumrules"))
@@ -89,7 +89,7 @@ function newpoints_plugin_install()
 		  `pointsview` DECIMAL(16,2) NOT NULL default '0',
 		  `pointspost` DECIMAL(16,2) NOT NULL default '0',
 		  PRIMARY KEY  (`rid`)
-			) ENGINE=MyISAM{$collation}");
+			) ENGINE=InnoDB{$collation}");
 	}
 
 	if(!$db->table_exists("newpoints_grouprules"))
@@ -104,7 +104,7 @@ function newpoints_plugin_install()
 		  `period` bigint(30) UNSIGNED NOT NULL default '0',
 		  `lastpay` bigint(30) UNSIGNED NOT NULL default '0',
 		  PRIMARY KEY  (`rid`)
-			) ENGINE=MyISAM{$collation}");
+			) ENGINE=InnoDB{$collation}");
 	}
 
 	// add settings
