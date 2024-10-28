@@ -255,8 +255,8 @@ function newpoints_plugin_activate()
 
 	newpoints_add_template('newpoints_postbit', '<br /><span class="smalltext">{$currency}: <a href="{$mybb->settings[\'bburl\']}/newpoints.php">{$points}</a></span>{$donate}');
 	newpoints_add_template('newpoints_profile', '<tr>
-	<td class="trow2"><strong>{$currency}:</strong></td>
-	<td class="trow2"><a href="{$mybb->settings[\'bburl\']}/newpoints.php">{$points}</a>{$donate}</td>
+	<td class="trow1"><strong>{$currency}:</strong></td>
+	<td class="trow1"><a href="{$mybb->settings[\'bburl\']}/newpoints.php">{$points}</a>{$donate}</td>
 </tr>');
 
 	newpoints_add_template('newpoints_donate_inline', ' <span class="smalltext">[<a href="{$mybb->settings[\'bburl\']}/newpoints.php?action=donate&amp;uid={$uid}">{$lang->newpoints_donate}</a>]</span>');
