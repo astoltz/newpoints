@@ -309,8 +309,11 @@ elseif ($mybb->input['action'] == 'recount')
 				
 				$points += $pmssent*$mybb->settings['newpoints_income_pmsent'];
 			}
-			
-			$db->update_query('users', array('newpoints' => floatval($mybb->settings['newpoints_income_newreg'])+$points*$grouprules['rate']), 'uid=\''.$user['uid'].'\'');
+
+			$update_points = floatval($mybb->settings['newpoints_income_newreg']) + $points * $grouprules['rate'];
+			$plugins->run_hooks("newpoints_admin_maintenance_recount_user_points");
+
+			$db->update_query('users', array('newpoints' => $update_points), 'uid=\''.$user['uid'].'\'');
 		}
 		
 		if ($total_users > $start+intval($mybb->input['per_page']))
