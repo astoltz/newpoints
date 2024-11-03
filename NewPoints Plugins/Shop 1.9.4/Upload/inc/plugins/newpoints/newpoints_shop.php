@@ -47,6 +47,7 @@ if (defined("IN_ADMINCP"))
 	$plugins->add_hook("newpoints_admin_grouprules_edit", "newpoints_shop_admin_rule");
 	$plugins->add_hook("newpoints_admin_grouprules_add_insert", "newpoints_shop_admin_rule_post");
 	$plugins->add_hook("newpoints_admin_grouprules_edit_update", "newpoints_shop_admin_rule_post");
+	$plugins->add_hook("newpoints_admin_maintenance_recount_user_points", "newpoints_shop_admin_maintenance_recount_user_points");
 }
 else
 {
@@ -2323,4 +2324,27 @@ function newpoints_shop_admin_rule_post(&$array)
 	$array['items_rate'] = floatval($mybb->input['items_rate']);
 }
 
-?>
+function newpoints_shop_admin_maintenance_recount_user_points()
+{
+	global $mybb, $db, $lang, $user, $update_points;
+
+	$user = $db->fetch_array($db->simple_select('users', 'uid,newpoints_items', "uid='".$user['uid']."'"));
+
+	// Get how many items of this type we have in our inventory
+	$myitems = @unserialize($user['newpoints_items']);
+	if(!$myitems)
+		$myitems = array();
+
+	if (!empty($myitems))
+	{
+		$query = $db->simple_select('newpoints_shop_items', 'iid,price', 'visible=1 AND iid IN ('.implode(',', array_unique($myitems)).')');
+		while($item = $db->fetch_array($query))
+		{
+			while (false !== ($myitem = array_search($item['iid'], $myitems)))
+			{
+				$update_points -= floatval($item['price']);
+				unset($myitems[$myitem]);
+			}
+		}
+	}
+}
