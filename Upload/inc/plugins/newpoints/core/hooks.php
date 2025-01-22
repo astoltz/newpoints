@@ -34,7 +34,8 @@ if (NP_HOOKS == 1)
 	$plugins->add_hook('admin_load', 'newpoints_admin_load_hook');
 	$plugins->add_hook('admin_newpoints_menu', 'newpoints_admin_menu_hook');
 	$plugins->add_hook('admin_newpoints_action_handler', 'newpoints_admin_action_handler_hook');
-	$plugins->add_hook('admin_newpoints_permissions', 'newpoints_admin_permissions_hook');
+    $plugins->add_hook('admin_newpoints_permissions', 'newpoints_admin_permissions_hook');
+    $plugins->add_hook('newpoints_admin_maintenance_recount_user_points', 'newpoints_donations_admin_maintenance_recount_user_points');
 	
 	function newpoints_admin_load_hook()
 	{
@@ -86,7 +87,26 @@ if (NP_HOOKS == 1)
 		
 		// as plugins can't hook to admin_newpoints_permissions, we must allow them to hook to newpoints_newpoints_permissions
 		$admin_permissions = $plugins->run_hooks("newpoints_admin_newpoints_permissions", $admin_permissions);
-	}
+    }
+
+    function newpoints_donations_admin_maintenance_recount_user_points()
+    {
+        global $mybb, $db, $lang, $user, $update_points;
+
+        $query = $db->simple_select('newpoints_log', 'data', "action='donation' AND uid='{$user['uid']}'");
+        while($donation = $db->fetch_array($query)) {
+            $data = explode('-', $donation['data']);
+            $update_points -= $data[2];
+        }
+
+        $query = $db->simple_select('newpoints_log', 'data', "action='donation' AND uid!='{$user['uid']}' AND data LIKE '%-{$user['uid']}-%'");
+        while($donation = $db->fetch_array($query)) {
+            $data = explode('-', $donation['data']);
+            if ($data[1] == $user['uid']) {
+                $update_points += $data[2];
+            }
+        }
+    }
 }
 // outside ACP hooks
 elseif (NP_HOOKS == 2)
