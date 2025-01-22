@@ -2326,25 +2326,17 @@ function newpoints_shop_admin_rule_post(&$array)
 
 function newpoints_shop_admin_maintenance_recount_user_points()
 {
-	global $mybb, $db, $lang, $user, $update_points;
+    global $mybb, $db, $lang, $user, $update_points;
 
-	$user = $db->fetch_array($db->simple_select('users', 'uid,newpoints_items', "uid='".$user['uid']."'"));
+    $query = $db->simple_select('newpoints_log', 'data', "action='shop_purchase' AND uid='{$user['uid']}'");
+    while($purchase = $db->fetch_array($query)) {
+        $data = explode('-', $purchase['data']);
+        $update_points -= $data[1];
+    }
 
-	// Get how many items of this type we have in our inventory
-	$myitems = @unserialize($user['newpoints_items']);
-	if(!$myitems)
-		$myitems = array();
-
-	if (!empty($myitems))
-	{
-		$query = $db->simple_select('newpoints_shop_items', 'iid,price', 'visible=1 AND iid IN ('.implode(',', array_unique($myitems)).')');
-		while($item = $db->fetch_array($query))
-		{
-			while (false !== ($myitem = array_search($item['iid'], $myitems)))
-			{
-				$update_points -= floatval($item['price']);
-				unset($myitems[$myitem]);
-			}
-		}
-	}
+    $query = $db->simple_select('newpoints_log', 'data', "action='shop_sell' AND uid='{$user['uid']}'");
+    while($purchase = $db->fetch_array($query)) {
+        $data = explode('-', $purchase['data']);
+        $update_points += $data[1];
+    }
 }
